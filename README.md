@@ -1,0 +1,2 @@
+# shocking
+shocking colorful meteors es un juego basado en una serie de palabras básicas del idioma inglés, está diseñado para niños desde 5 a 12 años. Es un método didáctico que le permite a los pequeños infantes mejorar su agilidad mental y retentiva. Se diseñará en 2D y consiste en que el usuario disparará al meteoro con la palabra correcta, en caso de no acertar pierde una vida, se contará con 3 niveles.
