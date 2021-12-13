@@ -2,9 +2,12 @@
 package shocking;
 
 import States.GameState;
+import States.MenuState;
+import States.State ;
 import gameObject.constants;
 import graphics.Assets;
 import input.KeyBoard;
+import input.Mouse;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -30,8 +33,9 @@ public class Shocking extends JFrame implements Runnable{
     private double delta = 0;
     //captura los fotogramas por segundo
     private int AVERAGEFPS = FPS;
-    private GameState gameState;
+
     private KeyBoard keyBoard;
+    private Mouse Mouse;
     
     
     public Shocking(){
@@ -49,6 +53,7 @@ public class Shocking extends JFrame implements Runnable{
         //crea un area donde podemos dibujar
         canvas = new Canvas();
         keyBoard = new KeyBoard();
+        Mouse = new Mouse();
         
         canvas.setPreferredSize(new Dimension(constants.WIDTH, constants.HEIGHT));
         canvas.setMaximumSize(new Dimension(constants.WIDTH, constants.HEIGHT));
@@ -60,6 +65,9 @@ public class Shocking extends JFrame implements Runnable{
         add(canvas);
         
         canvas.addKeyListener(keyBoard);
+         canvas.addMouseListener(Mouse);
+         canvas.addMouseMotionListener(Mouse);
+        
         
         //para hacer visible la ventana
         setVisible(true);
@@ -73,7 +81,7 @@ public class Shocking extends JFrame implements Runnable{
   
     public void update(){
         keyBoard.update();
-        gameState.update();
+        State.getCurrentState().update();//la siguiente linea dibuja el estado actual
     }
     
     public void Draw(){
@@ -94,8 +102,10 @@ public class Shocking extends JFrame implements Runnable{
         g.setColor(Color.BLACK);
         
         //dibujamos el jugador
-        gameState.Draw(g);
+       
+         State.getCurrentState().draw(g);//la siguiente linea dibuja el estado actual
         
+        //ternina la linea de estado actual 
         g.drawString("" + AVERAGEFPS , 100, 100);
         
         //------fin-didbujo----------
@@ -105,7 +115,8 @@ public class Shocking extends JFrame implements Runnable{
     
     private void init(){
         Assets.init();
-        gameState = new GameState();
+    State.changeState(new MenuState(){});
+    // cada vex que se quiera llamar un estado se llama al metodo de esta linea.
     }
 
     @Override
