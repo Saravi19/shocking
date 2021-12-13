@@ -7,6 +7,8 @@ import gameObject.Player;
 import gameObject.Size;
 import gameObject.constants;
 import graphics.Assets;
+import graphics.Text;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -15,14 +17,14 @@ import java.util.ArrayList;
 import math.Vector2D;
 
 
-public class GameState {
+public class GameState extends State{//se agrega la clase estado que es la clase del menú.
     
     private Player player;
     private ArrayList<MovingObject> movingobjects = new ArrayList<MovingObject>();
     
     private int meteors;
     
-    public GameState(){
+    public GameState (){
         player = new Player(new Vector2D(100,500),new Vector2D(), constants.PLAYER_MAX_VEL, Assets.player,this);
         movingobjects.add(player);
         
@@ -100,13 +102,15 @@ public class GameState {
         startWave();
     }
     
-    public void Draw(Graphics g){
+    public void draw(Graphics g){
         
         Graphics2D g2d = (Graphics2D)g;
         g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
                 
         for(int i = 0; i<movingobjects.size();i++)
             movingobjects.get(i).Draw(g);
+        
+        
     }
 
     public ArrayList<MovingObject> getMovingobjects() {
@@ -116,6 +120,9 @@ public class GameState {
     public void setMovingobjects(ArrayList<MovingObject> movingobjects) {
         this.movingobjects = movingobjects;
     }
-    
+
+
+
+   
     
 }
